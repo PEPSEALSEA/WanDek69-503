@@ -47,9 +47,7 @@ export default function Home() {
           </>
         ) : (
           <>
-            <span className="animate-fade-in" style={{ display: 'inline-block', padding: '6px 16px', borderRadius: '100px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', fontSize: '0.875rem', marginBottom: '24px', color: '#22c55e' }}>
-              ● Online
-            </span>
+
 
             <div className="animate-fade-in delay-100" style={{ marginBottom: '40px' }}>
               <img

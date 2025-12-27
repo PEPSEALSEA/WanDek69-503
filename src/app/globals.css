@@ -321,3 +321,25 @@ a {
   animation: popup 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   opacity: 0;
 }
+
+@keyframes fast-shake {
+
+  0%,
+  100% {
+    transform: scale(1.1) rotate(0deg);
+  }
+
+  25% {
+    transform: scale(1.1) rotate(10deg);
+  }
+
+  75% {
+    transform: scale(1.1) rotate(-10deg);
+  }
+}
+
+.animate-opening-shake .gift-box {
+  animation: fast-shake 0.1s linear infinite;
+  box-shadow: 0 0 80px white;
+  /* Explosion build-up */
+}
