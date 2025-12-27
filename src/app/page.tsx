@@ -2,9 +2,14 @@
 
 import { useAuth } from "@/context/AuthContext";
 import LoginButton from "@/components/LoginButton";
+import GiftBox from "@/components/GiftBox";
+import { GIFT_DATA } from "@/data/gifts";
 
 export default function Home() {
   const { user, error, logout } = useAuth();
+
+  // Lookup gift for the current user
+  const userGift = user ? GIFT_DATA[user.email] : null;
 
   return (
     <main style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
@@ -15,7 +20,7 @@ export default function Home() {
         borderRadius: '50%', filter: 'blur(60px)', zIndex: -1, top: '-20%', left: '50%', transform: 'translateX(-50%)', opacity: 0.4
       }} />
 
-      <div className="container" style={{ textAlign: 'center', padding: '120px 20px 60px' }}>
+      <div className="container" style={{ textAlign: 'center', padding: '120px 20px 60px', width: '100%' }}>
 
         {!user ? (
           <>
@@ -28,7 +33,7 @@ export default function Home() {
             </h1>
 
             <p className="animate-fade-in delay-200" style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto 48px' }}>
-              Please sign in with your school email (@bpk.ac.th) to access the platform.
+              Please sign in with your school email (@bpk.ac.th) to open your gift.
             </p>
 
             <div className="animate-fade-in delay-300" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
@@ -52,29 +57,30 @@ export default function Home() {
                 alt={user.name}
                 style={{ width: '100px', height: '100px', borderRadius: '50%', border: '4px solid var(--accent-primary)', marginBottom: '20px' }}
               />
-              <h1 style={{ fontSize: '2.5rem', marginBottom: '8px' }}>Welcome back, {user.name}!</h1>
-              <p style={{ color: 'var(--text-secondary)' }}>{user.email}</p>
+              <h1 style={{ fontSize: '2rem', marginBottom: '8px' }}>Hello, {user.name}!</h1>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '40px' }}>
+                You have a special gift waiting for you.
+              </p>
+
+              <div style={{ margin: '40px 0' }}>
+                {userGift ? (
+                  <GiftBox text={userGift} />
+                ) : (
+                  <div className="glass-panel" style={{ padding: '40px', maxWidth: '500px', margin: '0 auto' }}>
+                    <h3>No Gift Found</h3>
+                    <p style={{ color: 'var(--text-secondary)', marginTop: '8px' }}>
+                      Sorry, we couldn't find a gift assigned to {user.email}.
+                    </p>
+                  </div>
+                )}
+              </div>
+
             </div>
 
-            <div className="animate-fade-in delay-200" style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
+            <div className="animate-fade-in delay-200" style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginTop: '40px' }}>
               <button onClick={logout} className="glass-panel" style={{ padding: '12px 24px', borderRadius: '12px', cursor: 'pointer', color: 'var(--text-primary)', fontWeight: 600 }}>
                 Sign Out
               </button>
-            </div>
-
-            <div className="animate-fade-in delay-300" style={{ marginTop: '80px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', width: '100%', maxWidth: '1000px', marginInline: 'auto', textAlign: 'left' }}>
-              <FeatureCard
-                title="Student Dashboard"
-                desc="Access your courses, assignments, and grades in one place."
-              />
-              <FeatureCard
-                title="Resources"
-                desc="Browse the library of digital resources available to BPK students."
-              />
-              <FeatureCard
-                title="Announcements"
-                desc="Stay up to date with the latest news from the department."
-              />
             </div>
           </>
         )}
@@ -82,13 +88,4 @@ export default function Home() {
       </div>
     </main>
   );
-}
-
-function FeatureCard({ title, desc }: { title: string; desc: string }) {
-  return (
-    <div className="glass-panel" style={{ padding: '40px', display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <h3 style={{ marginBottom: '16px', fontSize: '1.5rem' }}>{title}</h3>
-      <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7 }}>{desc}</p>
-    </div>
-  )
 }
