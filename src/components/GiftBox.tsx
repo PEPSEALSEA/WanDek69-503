@@ -13,7 +13,7 @@ export default function GiftBox({ text }: GiftBoxProps) {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '400px' }}>
 
             {!isOpen && (
-                <div style={{ marginBottom: '20px', color: 'var(--text-secondary)', fontSize: '1.2rem' }}>
+                <div className="animate-bounce" style={{ marginBottom: '60px', color: 'var(--text-secondary)', fontSize: '1.2rem', fontWeight: 600 }}>
                     Tap to open your gift!
                 </div>
             )}

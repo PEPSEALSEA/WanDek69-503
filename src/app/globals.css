@@ -142,71 +142,97 @@ a {
 .gift-container {
   perspective: 1000px;
   cursor: pointer;
+  padding: 40px;
+  /* Added padding to give space for animation */
 }
 
 .gift-box {
   width: 200px;
   height: 200px;
-  background: var(--gradient-primary);
+  /* Wrapping paper pattern with gradient */
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent),
+    var(--gradient-primary);
+  background-size: 30px 30px;
   border-radius: 12px;
   position: relative;
   z-index: 10;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    0 0 30px var(--accent-glow),
+    /* Magical glow */
+    inset 0 0 20px rgba(0, 0, 0, 0.2);
   transition: transform 0.5s ease;
   transform-style: preserve-3d;
+  animation: pulse-glow 3s infinite ease-in-out;
 }
 
 .gift-lid {
   width: 220px;
   height: 50px;
-  background: #4f46e5;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent),
+    #4f46e5;
+  background-size: 30px 30px;
   border-radius: 8px;
   position: absolute;
   top: -25px;
   left: -10px;
   z-index: 20;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   transform-origin: top;
   transition: transform 0.5s ease, opacity 0.3s ease;
 }
 
 .gift-bow {
-  width: 40px;
-  height: 40px;
-  background: gold;
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b);
   position: absolute;
-  top: -20px;
+  top: -25px;
   left: 50%;
   transform: translateX(-50%) rotate(45deg);
-  border-radius: 4px;
+  border-radius: 50% 50% 0 50%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .gift-bow::before,
 .gift-bow::after {
   content: '';
   position: absolute;
-  background: gold;
-  border-radius: 4px;
+  background: #b8860b;
+  border-radius: 2px;
 }
 
-.gift-bow::before {
-  width: 100%;
-  height: 10px;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-}
-
-.gift-bow::after {
-  width: 10px;
+/* Ribbon box wrap */
+.gift-lid::before {
+  content: '';
+  position: absolute;
+  width: 30px;
   height: 100%;
+  background: #ffd700;
   left: 50%;
-  top: 0;
   transform: translateX(-50%);
+  top: 0;
+}
+
+.gift-box::before {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 100%;
+  background: #ffd700;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
 }
 
 .gift-container:hover .gift-box {
-  animation: shake 0.5s ease-in-out infinite;
+  animation: excited-shake 0.8s ease-in-out infinite;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    0 0 60px var(--accent-primary);
+  /* Intense glow on hover */
 }
 
 .gift-container.opened .gift-box {
@@ -216,24 +242,58 @@ a {
 }
 
 .gift-container.opened .gift-lid {
-  transform: translateY(-100px) rotateX(120deg) rotateZ(10deg);
+  transform: translateY(-200px) rotateX(120deg) rotateZ(20deg);
   opacity: 0;
 }
 
-@keyframes shake {
-
-  0%,
-  100% {
-    transform: rotate(0deg);
+@keyframes excited-shake {
+  0% {
+    transform: scale(1) rotate(0);
   }
 
   25% {
-    transform: rotate(3deg);
+    transform: scale(1.05) rotate(5deg);
+  }
+
+  50% {
+    transform: scale(1.05) rotate(-5deg);
   }
 
   75% {
-    transform: rotate(-3deg);
+    transform: scale(1.05) rotate(5deg);
   }
+
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px var(--accent-glow);
+  }
+
+  50% {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 50px var(--accent-primary);
+  }
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 1.5s infinite ease-in-out;
 }
 
 @keyframes popup {
