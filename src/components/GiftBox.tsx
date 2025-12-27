@@ -35,7 +35,7 @@ export default function GiftBox({ text }: GiftBoxProps) {
                         {text}
                     </h1>
                     <div style={{ fontSize: '1.5rem', color: 'var(--text-secondary)' }}>
-                        Merry Christmas & Happy New Year!
+                        Happy Children's Day!
                     </div>
                 </div>
             )}
