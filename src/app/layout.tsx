@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
+import Script from "next/script";
+import { AuthProvider } from "@/context/AuthContext";
 import "./globals.css";
 
 const inter = Inter({
@@ -24,8 +26,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="referrer" content="no-referrer-when-downgrade" />
+      </head>
       <body className={`${inter.variable} ${outfit.variable}`}>
-        {children}
+        <Script src="https://accounts.google.com/gsi/client" strategy="beforeInteractive" />
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
