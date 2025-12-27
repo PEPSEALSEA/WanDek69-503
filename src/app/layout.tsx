@@ -16,7 +16,7 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: "WanDek69-503",
-  description: "Next.js project setup",
+  description: "Who do you want to give a gift to?",
 };
 
 export default function RootLayout({
