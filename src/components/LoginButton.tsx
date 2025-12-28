@@ -13,8 +13,20 @@ declare global {
 
 export default function LoginButton() {
     const { login } = useAuth();
+    const [isInAppBrowser, setIsInAppBrowser] = React.useState(false);
 
     useEffect(() => {
+        // Check for in-app browsers that usually block Google OAuth
+        const ua = navigator.userAgent || navigator.vendor || (window as any).opera;
+        const isLine = /Line\//i.test(ua);
+        const isFacebook = /FBAN|FBAV/i.test(ua);
+        const isInstagram = /Instagram/i.test(ua);
+
+        if (isLine || isFacebook || isInstagram) {
+            setIsInAppBrowser(true);
+            return;
+        }
+
         /* global google */
         if (typeof window !== 'undefined' && window.google) {
             window.google.accounts.id.initialize({
@@ -30,6 +42,37 @@ export default function LoginButton() {
             );
         }
     }, [login]);
+
+    if (isInAppBrowser) {
+        return (
+            <div style={{
+                padding: '16px',
+                background: 'rgba(255, 165, 0, 0.1)',
+                border: '1px solid rgba(255, 165, 0, 0.3)',
+                borderRadius: '12px',
+                textAlign: 'center',
+                maxWidth: '300px'
+            }}>
+                <p style={{ color: '#ffb700', marginBottom: '8px', fontWeight: 'bold' }}>
+                    ไม่สามารถเข้าสู่ระบบในแอพนี้ได้
+                </p>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '12px' }}>
+                    Google ปิดกั้นการเข้าสู่ระบบผ่าน In-app browser เพื่อความปลอดภัย
+                </p>
+                <div style={{
+                    background: 'rgba(255,255,255,0.05)',
+                    padding: '8px',
+                    borderRadius: '8px',
+                    fontSize: '0.85rem',
+                    color: 'var(--text-primary)'
+                }}>
+                    กรุณากดที่มุมขวาบน (⋮ หรือ ...) <br />
+                    เลือก <strong>"Open in External Browser"</strong> <br />
+                    (เปิดในเบราว์เซอร์เริ่มต้น)
+                </div>
+            </div>
+        );
+    }
 
     return <div id="googleSignInDiv"></div>;
 }
