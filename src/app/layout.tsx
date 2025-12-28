@@ -16,7 +16,7 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: "WanDek69-503",
-  description: "Who do you want to give a gift to?",
+  description: "คุณต้องมอบของขวัญให้ใครกันนะ",
 };
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="th">
       <head>
         <meta name="referrer" content="no-referrer-when-downgrade" />
       </head>

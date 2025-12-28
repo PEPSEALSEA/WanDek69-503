@@ -53,13 +53,13 @@ export default function GiftBox({ text }: GiftBoxProps) {
 
             {!isOpen && !isShaking && (
                 <div className="animate-bounce" style={{ marginBottom: '60px', color: 'var(--text-secondary)', fontSize: '1.2rem', fontWeight: 600 }}>
-                    Tap to open your gift!
+                    แตะเพื่อเปิดของขวัญ!
                 </div>
             )}
 
             {isShaking && (
                 <div style={{ marginBottom: '60px', color: 'var(--accent-primary)', fontSize: '1.2rem', fontWeight: 700 }}>
-                    Opening...
+                    กำลังเปิด...
                 </div>
             )}
 
@@ -80,7 +80,7 @@ export default function GiftBox({ text }: GiftBoxProps) {
                         {text}
                     </h1>
                     <div style={{ fontSize: '1.5rem', color: 'var(--text-secondary)' }}>
-                        Happy Children's Day!
+                        โชคดี!
                     </div>
                 </div>
             )}

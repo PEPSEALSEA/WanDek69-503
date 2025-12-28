@@ -25,15 +25,15 @@ export default function Home() {
         {!user ? (
           <>
             <span className="animate-fade-in" style={{ display: 'inline-block', padding: '6px 16px', borderRadius: '100px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', fontSize: '0.875rem', marginBottom: '24px', color: 'var(--accent-primary)' }}>
-              Authentication Required
+              กรุณาเข้าสู่ระบบ
             </span>
 
             <h1 className="text-gradient animate-fade-in delay-100" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', marginBottom: '24px', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
-              Welcome to <br /> WanDek69-503
+              ยินดีต้อนรับสู่ <br /> งานวันเด็ก 69-503
             </h1>
 
             <p className="animate-fade-in delay-200" style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto 48px' }}>
-              Please sign in with your school email (@bpk.ac.th) to open your gift.
+              กรุณาลงชื่อเข้าใช้ด้วยอีเมลโรงเรียน (@bpk.ac.th)
             </p>
 
             <div className="animate-fade-in delay-300" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
@@ -55,9 +55,9 @@ export default function Home() {
                 alt={user.name}
                 style={{ width: '100px', height: '100px', borderRadius: '50%', border: '4px solid var(--accent-primary)', marginBottom: '20px' }}
               />
-              <h1 style={{ fontSize: '2rem', marginBottom: '8px' }}>Hello, {user.name}!</h1>
+              <h1 style={{ fontSize: '2rem', marginBottom: '8px' }}>สวัสดี {user.name}!</h1>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '40px' }}>
-                You have a special gift waiting for you.
+                มีของขวัญพิเศษรอคุณอยู่
               </p>
 
               <div style={{ margin: '40px 0' }}>
@@ -65,9 +65,9 @@ export default function Home() {
                   <GiftBox text={userGift} />
                 ) : (
                   <div className="glass-panel" style={{ padding: '40px', maxWidth: '500px', margin: '0 auto' }}>
-                    <h3>No Gift Found</h3>
+                    <h3>ไม่พบของขวัญ</h3>
                     <p style={{ color: 'var(--text-secondary)', marginTop: '8px' }}>
-                      Sorry, we couldn't find a gift assigned to {user.email}.
+                      ขออภัย ไม่พบของขวัญสำหรับ {user.email}
                     </p>
                   </div>
                 )}
@@ -77,7 +77,7 @@ export default function Home() {
 
             <div className="animate-fade-in delay-200" style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginTop: '40px' }}>
               <button onClick={logout} className="glass-panel" style={{ padding: '12px 24px', borderRadius: '12px', cursor: 'pointer', color: 'var(--text-primary)', fontWeight: 600 }}>
-                Sign Out
+                ออกจากระบบ
               </button>
             </div>
           </>
