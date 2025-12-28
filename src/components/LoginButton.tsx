@@ -22,7 +22,18 @@ export default function LoginButton() {
         const isFacebook = /FBAN|FBAV/i.test(ua);
         const isInstagram = /Instagram/i.test(ua);
 
-        if (isLine || isFacebook || isInstagram) {
+        if (isLine) {
+            if (window.location.search.indexOf("openExternalBrowser=1") === -1) {
+                const url = new URL(window.location.href);
+                url.searchParams.set("openExternalBrowser", "1");
+                window.location.href = url.toString();
+                return;
+            }
+            setIsInAppBrowser(true);
+            return;
+        }
+
+        if (isFacebook || isInstagram) {
             setIsInAppBrowser(true);
             return;
         }
